@@ -14,19 +14,19 @@
 # Here's an article on doing so -- https://stackoverflow.com/questions/3903817/pull-new-updates-from-original-github-repository-into-forked-github-repository
 
 # Your parking gargage class should have the following methods:
-# - takeTicket 
-# - This should decrease the amount of tickets available by 1
-# - This should decrease the amount of parkingSpaces available by 1
+# - takeTicket -Alex
+# - This should decrease the amount of tickets available by 1 -Alex
+# - This should decrease the amount of parkingSpaces available by 1 - Alex
 # - payForParking
 # - Display an input that waits for an amount from the user and store it in a variable
 # - If the payment variable is not empty then (meaning the ticket has been paid) -> display a message to the user that their ticket has been paid and they have 15mins to leave
 # - This should update the "currentTicket" dictionary key "paid" to True
 # -leaveGarage
-# - If the ticket has been paid, display a message of "Thank You, have a nice day"
+# - If the ticket has been paid, display a message of "Thank You, have a nice day" 
 # - If the ticket has not been paid, display an input prompt for payment
-# - Once paid, display message "Thank you, have a nice day!"
-# - Update parkingSpaces list to increase by 1 (meaning add to the parkingSpaces list)
-# - Update tickets list to increase by 1 (meaning add to the tickets list)
+# - Once paid, display message "Thank you, have a nice day!" - Alex
+# - Update parkingSpaces list to increase by 1 (meaning add to the parkingSpaces list) -Alex
+# - Update tickets list to increase by 1 (meaning add to the tickets list) -Alex
 
 # You will need a few attributes as well:
 # - tickets -> list
@@ -43,33 +43,85 @@
 
 
 class parking_garage():
-    def __init__(self,tickets, parking_spaces):
-        self.tickets = tickets 
-        self.parking_spaces = parking_spaces
+    def __init__(self,make, model):
+        self.make = make 
+        self.model = model
         self.current_tickets = {}
+        self.payment_dictionary = {}
         self.number_of_tickets = 0
         self.number_of_parking_spaces = 0
         self.total_number_of_tickets_left = 100
         self.total_number_of_parking_spots_left = 100
 
     def take_a_ticket(self):
-        ticket = input ('Would you like to take a parking ticket today?')
-        amount = input ('This will ticket will be around $5.00 is that okay? Yes or else quit')
-        self.current_tickets[ticket] = amount
+        ticket = input ('Would you like to take a parking ticket today? or quit')
+        if ticket == 'quit':
+            self.options()
+        make = input ('What type of car do you have?')
+        model = input('What model is your car?')
+        color = input('What color is your car?')
+        amount = input ('This will ticket will be around $5.00 is that okay? or quit')
+        self.current_tickets[ticket] = amount and make and model and color
+        if amount == 'quit':
+            self.options()
+        elif self.total_number_of_tickets_left <=1:
+            print('No more tickets are available. Parking lot is full. Have a nice day')
+            self.options()
         self.number_of_tickets += 1
         self.number_of_parking_spaces += 1
         self.total_number_of_tickets_left -= 1
         self.total_number_of_parking_spots_left -= 1
         print('A ticket is be printing.')
         print(f'There are a total number of parking spots left: {self.total_number_of_parking_spots_left}')
+        print(f'{self.current_tickets}')
     
-    def paid(self):
+    def ticket_payment(self):
+        ticket = input ('Would you like to pay for parking? or quit')
+        amount = input ('Please pay $5.00. Enter your card and type in 5')
+        if amount == '5':
+            self.current_tickets[ticket] = amount
+            self.number_of_tickets -= 1
+            self.number_of_parking_spaces -= 1
+            self.total_number_of_tickets_left += 1
+            self.total_number_of_parking_spots_left += 1
+            print('Thank you, have a nice day!')
+        elif ticket == 'quit':
+            self.options()
+        else:
+            print('Invalid answer. Please pay $5.00')
+            self.ticket_payment()
+
+    def employee(self):
+        print(f'{self.total_number_of_parking_spots_left}')
+        print(f'{self.total_number_of_parking_spots_left}')
+        print(f'{self.current_tickets}')
+        print(f'{self.payment_dictionary}')
         print('Thank you, have a nice day!')
+    
+    def quit(self):
+        print('Thank you, have a nice day!')
+        print(f'There are {self.total_number_of_parking_spots_left} parking spots left')
 
-Carter = parking_garage('order','1')
 
-Carter.take_a_ticket()
-Carter.paid()
+    def options(self):
+        while True:
+            user = input('Welcome to the parking garage you can choose through the following options: ticket, payment, employee, quit')
+            if user == 'ticket':
+                self.take_a_ticket()
+            elif user == 'payment':
+                self.ticket_payment()
+            elif user == 'employee':
+                self.employee()
+            elif user == 'quit':
+                self.quit()
+                break
+            else:
+                print('Invalid answer please try again')
+
+
+User = parking_garage('Make','Model')
+
+User.options()
 
 
 
