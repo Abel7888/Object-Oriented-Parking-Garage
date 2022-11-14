@@ -64,7 +64,7 @@ class parking_garage():
             self.options()
         elif self.total_number_of_tickets_left <=1:
             print('No more tickets are available. Parking lot is full. Have a nice day ')
-        self.current_tickets[make] = license
+        self.current_tickets[license] = make
         self.number_of_tickets += 1
         self.number_of_parking_spaces += 1
         self.total_number_of_tickets_left -= 1
@@ -75,12 +75,13 @@ class parking_garage():
         print(f'{self.current_tickets}')
     
     def ticket_payment(self):
-        ticket = input ('Would you like to pay for parking? If so please type in your license place or quit. ')
-        if ticket == 'quit':
+        license_plate = input ('Would you like to pay for parking? If so please type in your license place or quit. ')
+        if license_plate == 'quit':
             self.options()
         display = input ('Please pay $5.00. Enter your card and type in 5. You can also type in quit or no. ')
         if display == '5':
-            self.payment_dictionary[ticket] = display
+            self.payment_dictionary[license_plate] = display
+            del self.current_tickets[license_plate]
             self.number_of_tickets -= 1
             self.number_of_parking_spaces -= 1
             self.total_number_of_tickets_left += 1
@@ -127,5 +128,3 @@ class parking_garage():
 User = parking_garage('Make','Model')
 
 User.options()
-
-
