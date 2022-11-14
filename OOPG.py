@@ -114,7 +114,8 @@ class parking_garage():
                 self.employee()
             elif user == 'quit':
                 self.quit()
-                break
+               break
+                
             else:
                 print('Invalid answer please try again')
 
