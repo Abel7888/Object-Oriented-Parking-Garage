@@ -54,58 +54,63 @@ class parking_garage():
         self.total_number_of_parking_spots_left = 100
 
     def take_a_ticket(self):
-        ticket = input ('Would you like to take a parking ticket today? or quit')
+        ticket = input ('Would you like to take a parking ticket today? or quit ')
         if ticket == 'quit':
             self.options()
-        make = input ('What type of car do you have?')
-        model = input('What model is your car?')
-        color = input('What color is your car?')
-        amount = input ('This will ticket will be around $5.00 is that okay? or quit')
-        self.current_tickets[ticket] = amount and make and model and color
+        make = input ('What type of car do you have? Please specify the make and model. ')
+        license = input('What is the license place of your car? ')
+        amount = input ('This will ticket will be around $5.00 is that okay? or quit ')
         if amount == 'quit':
             self.options()
         elif self.total_number_of_tickets_left <=1:
-            print('No more tickets are available. Parking lot is full. Have a nice day')
-            self.options()
+            print('No more tickets are available. Parking lot is full. Have a nice day ')
+        self.current_tickets[make] = license
         self.number_of_tickets += 1
         self.number_of_parking_spaces += 1
         self.total_number_of_tickets_left -= 1
         self.total_number_of_parking_spots_left -= 1
-        print('A ticket is be printing.')
-        print(f'There are a total number of parking spots left: {self.total_number_of_parking_spots_left}')
+        print('A ticket is be printing. You have 15 mins to lead. ')
+        print(f'There are a total number of parking spots left: {self.total_number_of_parking_spots_left}. ')
+        print(f'There are a total number of parking tickets left: {self.total_number_of_tickets_left}. ')
         print(f'{self.current_tickets}')
     
     def ticket_payment(self):
-        ticket = input ('Would you like to pay for parking? or quit')
-        amount = input ('Please pay $5.00. Enter your card and type in 5')
-        if amount == '5':
-            self.current_tickets[ticket] = amount
+        ticket = input ('Would you like to pay for parking? If so please type in your license place or quit. ')
+        if ticket == 'quit':
+            self.options()
+        display = input ('Please pay $5.00. Enter your card and type in 5. You can also type in quit or no. ')
+        if display == '5':
+            self.payment_dictionary[ticket] = display
             self.number_of_tickets -= 1
             self.number_of_parking_spaces -= 1
             self.total_number_of_tickets_left += 1
             self.total_number_of_parking_spots_left += 1
-            print('Thank you, have a nice day!')
-        elif ticket == 'quit':
+            print('Thank you, you have 15 minutes to leave have a nice day!')
+        elif display == 'no':
+            print('Please try again or have a nice day!')
+            self.ticket_payment()
+        elif display == 'quit':
             self.options()
         else:
             print('Invalid answer. Please pay $5.00')
             self.ticket_payment()
 
     def employee(self):
-        print(f'{self.total_number_of_parking_spots_left}')
-        print(f'{self.total_number_of_parking_spots_left}')
-        print(f'{self.current_tickets}')
-        print(f'{self.payment_dictionary}')
+        print(f'These are the number of parking spots available {self.total_number_of_parking_spots_left}')
+        print(f'These are the number of tickets available {self.total_number_of_tickets_left}')
+        print(f'Here is a list of the daily parkers: {self.current_tickets}')
+        print(f'Here is a list of who has paid for parking: {self.payment_dictionary}')
         print('Thank you, have a nice day!')
     
     def quit(self):
         print('Thank you, have a nice day!')
         print(f'There are {self.total_number_of_parking_spots_left} parking spots left')
+        print(f'There are {self.total_number_of_tickets_left} total number of tickets left left')
 
 
     def options(self):
         while True:
-            user = input('Welcome to the parking garage you can choose through the following options: ticket, payment, employee, quit')
+            user = input('Welcome to the parking garage you can choose through the following options: ticket, payment, employee, quit ')
             if user == 'ticket':
                 self.take_a_ticket()
             elif user == 'payment':
@@ -114,8 +119,7 @@ class parking_garage():
                 self.employee()
             elif user == 'quit':
                 self.quit()
-               break
-                
+                break
             else:
                 print('Invalid answer please try again')
 
