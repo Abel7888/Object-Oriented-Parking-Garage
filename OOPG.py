@@ -77,7 +77,7 @@ class parking_garage():
     
     def ticket_payment(self):
         ticket = input ('Would you like to pay for parking? or quit')
-        amount = input ('Please pay $5.00. Enter your card and type in 5')
+        amount = input('Please pay $5.00. Enter your card and type in 5')
         if amount == '5':
             self.current_tickets[ticket] = amount
             self.number_of_tickets -= 1
@@ -123,5 +123,20 @@ User = parking_garage('Make','Model')
 
 User.options()
 
+#here is the pay for parking
+
+class payforparking():
+
+    def __init__(self, paynow1,):
+        self.paynow1 = paynow1
+        
+
+    def paynow(self):
+        checkout = input('Are you ready to pay your parking balance' "Yes or No or quit")
+        if checkout == 'yes':
+            print('Thank you! Your ticket has been paid and you have 15mins to leave')
+            else:
+                print('please contact customer service')
+                
 
 
