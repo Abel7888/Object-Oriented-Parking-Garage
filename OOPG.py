@@ -123,31 +123,4 @@ User = parking_garage('Make','Model')
 
 User.options()
 
-class leavegarage():
-    def __init__(self,paid,notpaid)
-        self.paid = paid
-        self.notpaid = notpaid
-        self.number_of_tickets = 0
-        self.number_of_parking_spaces = 0
-        self.total_number_of_tickets = 100
-        self.total_number_of_parking_spaces_left = 100
-
-def paid(self):
-    display = input('Press "Yes" to complete payment')
-        if display == 'Yes':
-            self.number_of_tickets -= 1
-            self.number_of_parking_spaces -= 1
-            self.total_number_of_tickets_left += 1
-            self.total_number_of_parking_spots_left += 1
-            print('Thank you, have a nice day!')
-
-def notpaid(self):
-    display = input('Press "No" to cancel payment')
-        if display == 'No':
-            self.number_of_tickets -= 0
-            self.number_of_parking_spaces -= 0
-            self.total_number_of_tickets_left += 0
-            self.total_number_of_parking_spots_left += 0
-            print('Please try again or have a nice day!')
-
 
